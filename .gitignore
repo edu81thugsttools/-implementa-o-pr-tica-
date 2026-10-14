@@ -1,0 +1,8 @@
+node_modules/
+.env
+dist/
+
+npm init -y
+npm install ai @ai-sdk/deepseek zod dotenv
+npm install typescript @types/node tsx --save-dev
+npx tsc --init
