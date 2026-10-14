@@ -1,4 +1,22 @@
-"type": "module",
-"scripts": {
-  "start": "tsx src/saidAgent.ts"
+{
+  "name": "said-framework-deepseek",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Projeto demonstrativo do Método SAID: regras determinísticas, JSON validado e explicação via DeepSeek.",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/saidAgent.ts",
+    "test": "tsx --test tests/domain.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "openai": "^4.104.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
 }
