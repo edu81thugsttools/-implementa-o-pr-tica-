@@ -1,0 +1,1 @@
+npm install typescript @types/node tsx --save-dev
