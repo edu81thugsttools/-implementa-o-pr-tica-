@@ -13,19 +13,6 @@ Ao forçar o modelo de raciocínio lógico avançado do **DeepSeek** a responder
 
 ---
 
-## 🏗️ Camadas da Solução Arquitetada
-
-# ⚡ SAID Framework: Structured Outputs com DeepSeek + Contexto Vetorial (RAG)
-
-Este repositório documenta a implementação prática do **Método SAID (Sistema de Arquitetura, Integração e Desempenho com IA)** operando de forma autônoma e determinística. O objetivo é eliminar o comportamento probabilístico tradicional das LLMs e transformá-las em microsserviços integrados a contratos rígidos de software.
-
-## 🧠 Filosofia de Engenharia: O JSON como Ponto de Fusão
-
-Modelos de linguagem convencionais tendem a alucinar ou gerar texto puramente conversacional ("conversar fiado"). Na arquitetura de nível sênior, tratamos o **JSON como o verdadeiro ponto de fusão** entre o determinismo dos sistemas tradicionais e a probabilidade das IAs. 
-
-Ao forçar o modelo de raciocínio lógico avançado do **DeepSeek** a responder estritamente através de **Structured Outputs (JSON Mode)**, nós o obrigamos a preencher um contrato de software. As buscas por proximidade semântica (**Embeddings Vetoriais**) trazem o contexto exato do banco de dados, mas é a estrutura rígida do JSON que embala e injeta essa precisão milimétrica nas APIs do ecossistema.
-
----
 
 ## 🏗️ Camadas da Solução Arquitetada
 ┌────────────────────────┐      ┌────────────────────────┐      ┌────────────────────────┐
@@ -34,6 +21,10 @@ Ao forçar o modelo de raciocínio lógico avançado do **DeepSeek** a responder
 │ Semântica no DB        │      │    (Reasoning Logic)   │      │ Ready for Backend APIs │
 └────────────────────────┘      └────────────────────────┘      └────────────────────────┘
 
+
+# ⚡ SAID Framework: Structured Outputs com DeepSeek + Contexto Vetorial (RAG)
+
+Este repositório documenta a implementação prática do **Método SAID (Sistema de Arquitetura, Integração e Desempenho com IA)** operando de forma autônoma e determinística. O objetivo é eliminar o comportamento probabilístico tradicional das LLMs e transformá-las em microsserviços integrados a contratos rígidos de software.
 
 
 1. **Injeção de Contexto Vetorial:** Recuperação de dados corporativos complexos via base vetorial para mitigar alucinações.
