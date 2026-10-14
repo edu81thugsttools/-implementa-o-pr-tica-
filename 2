@@ -1,0 +1,102 @@
+// npm install ai @ai-sdk/deepseek zod dotenv
+// npm install -typescript @types/node --save-dev
+
+
+import { generateObject } from 'ai';
+import { createDeepSeek } from '@ai-sdk/deepseek';
+import { z } from 'zod';
+import * as dotenv from 'dotenv';
+
+// Carrega as variáveis de ambiente (.env) contendo a DEEPSEEK_API_KEY
+dotenv.config();
+
+// Inicializa o provedor DeepSeek configurado para o modelo de raciocínio avançado
+const deepseek = createDeepSeek({
+  apiKey: process.env.DEEPSEEK_API_KEY,
+});
+
+/**
+ * 🛡️ CAMADA DE TÉCNICA / VALIDAÇÃO (CONTRATO DE SOFTWARE VETORIAL)
+ * Definição do esquema JSON rígido usando Zod.
+ * A IA é obrigada a responder seguindo exatamente esta estrutura e tipagem.
+ */
+const CargaValidationSchema = z.object({
+  id_carga: z.string().describe('O identificador único da carga analisada.'),
+  status_validacao: z.enum(['APROVADO', 'REJEITADO', 'SUSPEITO']),
+  peso_calculado_kg: z.number().describe('O peso líquido final calculado pelo modelo.'),
+  divergencia_detectada: z.boolean().describe('True se houver quebra de regra de negócio.'),
+  motivo_analise: z.string().describe('Justificativa técnica detalhada e concisa do veredito.'),
+  metricas_auditoria: z.object({
+    latência_estimada_ms: z.number(),
+    confiabilidade_score: z.number().min(0).max(1),
+  }),
+});
+
+// Extrai a tipagem TypeScript estrita gerada automaticamente pelo Zod
+type CargaValidationResult = z.infer<typeof CargaValidationSchema>;
+
+/**
+ * ⚙️ CAMADA DE ARQUITETURA E ORQUESTRAÇÃO (MÉTODO SAID)
+ * Executa a chamada determinística para o DeepSeek injetando o contexto.
+ */
+async function supervisionarCargaFlorestal(
+  dadosInput: string,
+  contextoVetorial: string
+): Promise<CargaValidationResult> {
+  try {
+    // Uso do generateObject para forçar o Structured Output (JSON Mode nativo)
+    const { object } = await generateObject({
+      model: deepseek('deepseek-reasoner'), // Modelo com foco em lógica profunda
+      schema: CargaValidationSchema,
+      schemaName: 'ValidacaoCargaFlorestal',
+      schemaDescription: 'Contrato de software para auditoria de balança e cubagem.',
+      temperature: 0.0, // Determínismo máximo (zero conversinha fiada)
+      system: `Atue como um Supervisor Estratégico de IA e compilador determinístico. 
+      Sua única função é cruzar os dados de input com o contexto recuperado via busca vetorial.
+      Analise o peso e as regras de negócio sem desvios. O seu output preencherá um contrato rígido de software.`,
+      prompt: `
+        <contexto_vetorial_db>
+        ${contextoVetorial}
+        </contexto_vetorial_db>
+
+        <dados_input_balanca>
+        ${dadosInput}
+        </dados_input_balanca>
+      `,
+    });
+
+    // O retorno já vem 100% tipado e validado pelo Zod
+    return object;
+
+  } catch (error) {
+    console.error('❌ [SAID ERROR] Falha crítica na validação ou quebra de contrato JSON:', error);
+    throw error;
+  }
+}
+
+/**
+ * 🚀 SIMULAÇÃO DE AMBIENTE DE PRODUÇÃO
+ */
+async function executarCenario() {
+  // Simulando dados que vieram da telemetria do campo
+  const inputBalanca = JSON.stringify({
+    id_carga: "CRG-2026-9982",
+    peso_bruto_declarado: 45000,
+    tara_veiculo: 15000
+  });
+
+  // Simulando contexto recuperado do banco vetorial (Embeddings)
+  const contextoRAG = `
+    Talhão ID T-45: Espécie E. Grandis, Idade 7 anos. 
+    Capacidade volumétrica máxima estimada para este lote de transporte: 28000 kg líquido.
+    Alerta de segurança: Desvios acima de 5% do planejado indicam erro de leitura ou fraude.
+  `;
+
+  console.log('🔄 Executando validação via Método SAID...');
+  const resultado = await supervisionarCargaFlorestal(inputBalanca, contextoRAG);
+  
+  console.log('\n✅ [CONTRATO JSON PREENCHIDO COM SUCESSO]:');
+  console.log(JSON.stringify(resultado, null, 2));
+}
+
+executarCenario();
