@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    /* 🎯 Alvos e Módulos Modernos (Padrão 2026/Node 20+) */
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+
+    /* 🛡️ REGRAS DE SEGURANÇA E TIPAGEM ESTRITA (NÍVEL SÊNIOR) */
+    "strict": true,                         /* Ativa todas as checagens estritas de tipo */
+    "noImplicitAny": true,                  /* Erro se uma variável não tiver tipo definido */
+    "strictNullChecks": true,               /* Impede erros clássicos de 'null/undefined' em tempo de execução */
+    "strictFunctionTypes": true,            /* Validação rigorosa de parâmetros de funções */
+    "noImplicitThis": true,                 /* Garante o escopo correto da palavra-chave 'this' */
+    "alwaysStrict": true,                   /* Força o modo 'use strict' em todos os arquivos de saída */
+
+    /* 🔍 AUDITORIA DE CÓDIGO E BOAS PRÁTICAS */
+    "noUnusedLocals": true,                 /* Erro se houver variáveis locais criadas e não utilizadas */
+    "noUnusedParameters": true,             /* Erro se houver parâmetros de funções não utilizados */
+    "noImplicitReturns": true,              /* Obriga que todas as ramificações de uma função retornem valor */
+    "noFallthroughCasesInSwitch": true,      /* Impede que blocos switch passem para o próximo case sem break */
+    "noUncheckedIndexedAccess": true,       /* Adiciona 'undefined' ao ler arrays/objetos dinâmicos por índice */
+
+    /* ⚡ Compatibilidade e Interoperabilidade */
+    "esModuleInterop": true,                /* Facilita a importação de módulos CommonJS antigos */
+    "forceConsistentCasingInFileNames": true, /* Evita bugs de maiúsculas/minúsculas entre Windows e Linux/Docker */
+    "skipLibCheck": true                    /* Ignora checagem de tipos dentro da pasta node_modules para acelerar o build */
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.spec.ts"]
+}
